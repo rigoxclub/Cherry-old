@@ -1,10 +1,12 @@
-package club.rigox.economy.listeners;
+package club.rigox.cherry.listeners;
 
-import club.rigox.economy.Cherry;
+import club.rigox.cherry.Cherry;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import static club.rigox.cherry.utils.Console.debug;
 
 public class PlayerListener implements Listener {
     private Cherry cherry;
@@ -19,7 +21,8 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         if (!(player.hasPlayedBefore())) {
-
+            debug(String.format("Adding %s to the database with uuid %s", player, player.getUniqueId()));
+//            cherry.getMongoDB().storePlayer(player.getUniqueId(), 100);
         }
     }
 }

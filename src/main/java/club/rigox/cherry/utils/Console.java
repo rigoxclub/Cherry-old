@@ -1,4 +1,4 @@
-package club.rigox.economy.utils;
+package club.rigox.cherry.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
