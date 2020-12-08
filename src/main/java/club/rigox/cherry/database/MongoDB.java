@@ -5,11 +5,13 @@ import com.mongodb.*;
 
 import java.util.UUID;
 
+import static club.rigox.cherry.utils.Console.info;
 import static club.rigox.cherry.utils.Console.warn;
 
 public class MongoDB {
     private final Cherry cherry;
     private DBCollection player;
+    MongoClient client;
     private int credits;
 
     public MongoDB (Cherry plugin) {
@@ -26,7 +28,7 @@ public class MongoDB {
                 databaseConfig("password"),
                 databaseConfig("host")));
 
-        MongoClient client = new MongoClient(uri);
+        client = new MongoClient(uri);
         DB database = client.getDB(databaseConfig("database"));
         player = database.getCollection("players");
         return true;
@@ -48,5 +50,10 @@ public class MongoDB {
             return;
         }
         credits = (int) found.get("credits");
+    }
+
+    public void close() {
+        client.close();
+        info("MongoDB connection closed!");
     }
 }

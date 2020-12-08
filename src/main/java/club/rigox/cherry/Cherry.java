@@ -40,6 +40,7 @@ public final class Cherry extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        getMongoDB().close();
     }
 
     public MongoDB getMongoDB() {

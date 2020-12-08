@@ -15,4 +15,8 @@ public class Console {
     public static void warn (String str) {
         Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&eWARN&f] %s", str)));
     }
+
+    public static void info (String str) {
+        Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&aINFO&f] %s", str)));
+    }
 }
