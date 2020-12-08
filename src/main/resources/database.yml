@@ -1,0 +1,5 @@
+mongodb:
+  user: rigox
+  password: rigoxAdmin
+  host: rigoxclub.7rnl2.mongodb.net
+  database: minecraft
