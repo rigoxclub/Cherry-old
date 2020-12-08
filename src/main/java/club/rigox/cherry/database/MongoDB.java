@@ -18,10 +18,13 @@ public class MongoDB {
     public String databaseConfig(String str) {
         return cherry.getDatabase().getString("mongodb." + str);
     }
+
     public boolean connect(){
-        uri = new MongoClientURI("mongodb+srv://" + databaseConfig("user") +
-                ":" + databaseConfig("password") + "@" + databaseConfig("host") +
-                "/admin?retryWrites=true&w=majority");
+        uri = new MongoClientURI(String.format("mongodb+srv://%s:%s@%s/admin?retryWrites=true&w=majority",
+                databaseConfig("user"),
+                databaseConfig("password"),
+                databaseConfig("host")));
+
         client = new MongoClient(uri);
         database = client.getDatabase(databaseConfig("database"));
         return true;
