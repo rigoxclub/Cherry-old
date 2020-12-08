@@ -1,8 +1,8 @@
 package club.rigox.economy.database;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
+import com.mongodb.*;
+
+import java.util.UUID;
 
 public class MongoDB {
     private MongoClient client = new MongoClient();
@@ -23,4 +23,12 @@ public class MongoDB {
         return true;
     }
 
+    public void storePlayer (UUID uuid, int credits) {
+        // Store first player on the PlayerJoin listener.
+        DBObject object = new BasicDBObject("uuid", uuid);
+        object.put("credits", credits);
+
+        // Insert object to the players collection.
+        players.insert(object);
+    }
 }
