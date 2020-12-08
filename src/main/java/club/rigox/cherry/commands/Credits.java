@@ -23,8 +23,9 @@ public class Credits implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        int credits = cherry.getMongoDB().getPlayerCredits(player.getUniqueId());
 
-        player.sendMessage();
+        player.sendMessage(color(String.format("&8&l* &fYou have &b%s &fcredits", credits)));
         return false;
     }
 }

@@ -2,15 +2,15 @@ package club.rigox.cherry.database;
 
 import club.rigox.cherry.Cherry;
 import com.mongodb.*;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-import static club.rigox.cherry.utils.Console.info;
-import static club.rigox.cherry.utils.Console.warn;
+import static club.rigox.cherry.utils.Console.*;
 
 public class MongoDB {
     private final Cherry cherry;
-    private DBCollection player;
+    private DBCollection playerCollection;
     MongoClient client;
     private int credits;
 
@@ -30,26 +30,28 @@ public class MongoDB {
 
         client = new MongoClient(uri);
         DB database = client.getDB(databaseConfig("database"));
-        player = database.getCollection("players");
+        playerCollection = database.getCollection("players");
         return true;
     }
 
     public void storePlayer (UUID uuid, int credits) {
         DBObject object = new BasicDBObject("UUID", uuid.toString());
         object.put("credits", credits);
-        player.insert(object);
+        playerCollection.insert(object);
     }
 
-    public void readPlayer (UUID uuid) {
-        DBObject r = new BasicDBObject("UUID", uuid);
-        DBObject found = player.findOne(r);
+    public int getPlayerCredits (UUID uuid) {
+        DBObject r = new BasicDBObject("UUID", uuid.toString());
+        DBObject found = playerCollection.findOne(r);
 
         if (found == null) {
             warn("Player has been added to the database while being checked.");
             storePlayer(uuid, 100);
-            return;
+            return 0;
         }
         credits = (int) found.get("credits");
+        debug(String.format("uuid %s has %s credits", uuid, credits));
+        return credits;
     }
 
     public void close() {
