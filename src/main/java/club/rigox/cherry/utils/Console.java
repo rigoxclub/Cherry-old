@@ -8,8 +8,11 @@ public class Console {
         return ChatColor.translateAlternateColorCodes('&', str);
     }
 
-
     public static void debug (String str) {
         Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&9DEBUG&f] %s", str)));
+    }
+
+    public static void warn (String str) {
+        Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&eWARN&f] %s", str)));
     }
 }

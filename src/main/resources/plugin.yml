@@ -1,4 +1,5 @@
-name: Economy
+name: Cherry
+
 version: ${project.version}
 main: club.rigox.cherry.Cherry
 api-version: 1.16
