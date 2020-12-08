@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static club.rigox.cherry.utils.Console.warn;
@@ -23,6 +24,9 @@ public final class Cherry extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
+        mongoLogger.setLevel(Level.SEVERE);
 
         this.database = createConfig("database");
 

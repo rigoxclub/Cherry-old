@@ -2,7 +2,6 @@ package club.rigox.cherry.database;
 
 import club.rigox.cherry.Cherry;
 import com.mongodb.*;
-import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
