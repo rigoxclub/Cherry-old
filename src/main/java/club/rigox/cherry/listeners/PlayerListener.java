@@ -22,7 +22,7 @@ public class PlayerListener implements Listener {
 
         if (!(player.hasPlayedBefore())) {
             debug(String.format("Adding %s to the database with uuid %s", player, player.getUniqueId()));
-//            cherry.getMongoDB().storePlayer(player.getUniqueId(), 100);
+            cherry.getMongoDB().storePlayer(player.getUniqueId(), 100);
         }
     }
 }

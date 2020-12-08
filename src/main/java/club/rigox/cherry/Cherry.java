@@ -1,5 +1,6 @@
 package club.rigox.cherry;
 
+import club.rigox.cherry.commands.Credits;
 import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.listeners.PlayerListener;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -9,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import static club.rigox.cherry.utils.Console.warn;
 
@@ -26,6 +28,8 @@ public final class Cherry extends JavaPlugin {
 
         this.mongoDB = new MongoDB(this);
         getMongoDB().connect();
+
+        new Credits(this);
 
         new PlayerListener(this);
     }
