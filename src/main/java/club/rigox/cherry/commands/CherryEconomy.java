@@ -39,7 +39,7 @@ public class CherryEconomy implements CommandExecutor {
                 Player target = cherry.getServer().getPlayer(args[1]);
 
                 if (target == null) {
-                    player.sendMessage(color("&cPlayer is offline."));
+                    player.sendMessage(color(String.format("&c%s is offline.", target.getName())));
                     return true;
                 }
 
