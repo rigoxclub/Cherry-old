@@ -21,6 +21,7 @@ public final class Cherry extends JavaPlugin {
 
     private MongoDB mongoDB;
     private FileConfiguration database;
+    private PlayerUtils playerUtils;
 
     @Override
     public void onEnable() {
@@ -51,6 +52,10 @@ public final class Cherry extends JavaPlugin {
 
     public FileConfiguration getDatabase() {
         return database;
+    }
+
+    public PlayerUtils getPlayerUtils() {
+        return playerUtils;
     }
 
     public FileConfiguration createConfig(String configName) {
