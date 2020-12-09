@@ -1,11 +1,18 @@
 package club.rigox.cherry.database;
 
 import club.rigox.cherry.Cherry;
-import com.mongodb.*;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.DBObject;
+import com.mongodb.BasicDBObject;
 
 import java.util.UUID;
 
-import static club.rigox.cherry.utils.Console.*;
+import static club.rigox.cherry.utils.Console.warn;
+import static club.rigox.cherry.utils.Console.debug;
+import static club.rigox.cherry.utils.Console.info;
 
 public class MongoDB {
     private final Cherry cherry;
