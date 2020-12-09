@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static club.rigox.cherry.utils.Console.color;
+import static club.rigox.cherry.utils.ConsoleUtils.color;
 
 public class Credits implements CommandExecutor {
     private final Cherry cherry;

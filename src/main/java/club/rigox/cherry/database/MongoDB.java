@@ -10,9 +10,9 @@ import com.mongodb.BasicDBObject;
 
 import java.util.UUID;
 
-import static club.rigox.cherry.utils.Console.warn;
-import static club.rigox.cherry.utils.Console.debug;
-import static club.rigox.cherry.utils.Console.info;
+import static club.rigox.cherry.utils.ConsoleUtils.warn;
+import static club.rigox.cherry.utils.ConsoleUtils.debug;
+import static club.rigox.cherry.utils.ConsoleUtils.info;
 
 public class MongoDB {
     private final Cherry cherry;

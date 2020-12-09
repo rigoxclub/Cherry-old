@@ -3,7 +3,7 @@ package club.rigox.cherry.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-public class Console {
+public class ConsoleUtils {
     public static String color (String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
     }

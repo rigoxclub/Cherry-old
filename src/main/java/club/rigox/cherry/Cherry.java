@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static club.rigox.cherry.utils.Console.warn;
+import static club.rigox.cherry.utils.ConsoleUtils.warn;
 
 public final class Cherry extends JavaPlugin {
     public static Cherry instance;

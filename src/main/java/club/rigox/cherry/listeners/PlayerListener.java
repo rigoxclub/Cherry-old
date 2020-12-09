@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import static club.rigox.cherry.utils.Console.debug;
+import static club.rigox.cherry.utils.ConsoleUtils.debug;
 
 public class PlayerListener implements Listener {
     private Cherry cherry;
