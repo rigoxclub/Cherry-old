@@ -9,3 +9,5 @@ website: https://rigox.club
 commands:
   credits:
     description: Credits command.
+  cherry:
+    description: Cherry command.

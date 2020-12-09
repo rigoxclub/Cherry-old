@@ -2,7 +2,6 @@ package club.rigox.cherry.database;
 
 import club.rigox.cherry.Cherry;
 import com.mongodb.*;
-import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -12,7 +11,7 @@ public class MongoDB {
     private final Cherry cherry;
     private DBCollection playerCollection;
     MongoClient client;
-    private int credits;
+
 
     public MongoDB (Cherry plugin) {
         this.cherry = plugin;
@@ -49,9 +48,24 @@ public class MongoDB {
             storePlayer(uuid, 100);
             return 0;
         }
-        credits = (int) found.get("credits");
+        int credits = (int) found.get("credits");
         debug(String.format("uuid %s has %s credits", uuid, credits));
         return credits;
+    }
+
+    public void updatePlayerCredits(UUID uuid, int credits) {
+        DBObject r = new BasicDBObject("UUID", uuid.toString());
+        DBObject found = playerCollection.findOne(r);
+
+        if (found == null) {
+            warn("Player has been added to the database while being checked.");
+            storePlayer(uuid, 100);
+            return;
+        }
+
+        BasicDBObject set = new BasicDBObject("$set", r);
+        set.append("$set", new BasicDBObject("credits", credits));
+        playerCollection.update(found, set);
     }
 
     public void close() {

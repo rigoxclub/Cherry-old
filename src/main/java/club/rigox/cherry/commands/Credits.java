@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import static club.rigox.cherry.utils.Console.color;
 
 public class Credits implements CommandExecutor {
-    private Cherry cherry;
+    private final Cherry cherry;
 
     public Credits (Cherry plugin) {
         this.cherry = plugin;
@@ -20,6 +20,7 @@ public class Credits implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(color("&cThis can only execute a player."));
+            return true;
         }
 
         Player player = (Player) sender;

@@ -1,5 +1,6 @@
 package club.rigox.cherry;
 
+import club.rigox.cherry.commands.CherryEconomy;
 import club.rigox.cherry.commands.Credits;
 import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.listeners.PlayerListener;
@@ -34,6 +35,7 @@ public final class Cherry extends JavaPlugin {
         getMongoDB().connect();
 
         new Credits(this);
+        new CherryEconomy(this);
 
         new PlayerListener(this);
     }
