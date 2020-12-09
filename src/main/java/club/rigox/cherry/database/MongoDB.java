@@ -17,7 +17,7 @@ import static club.rigox.cherry.utils.Console.info;
 public class MongoDB {
     private final Cherry cherry;
     private DBCollection playerCollection;
-    MongoClient client;
+    private MongoClient client;
 
 
     public MongoDB (Cherry plugin) {
