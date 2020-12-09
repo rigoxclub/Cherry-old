@@ -47,6 +47,23 @@ public class CherryEconomy implements CommandExecutor {
                 int playerCredits = cherry.getMongoDB().getPlayerCredits(target.getUniqueId());
                 int newPlayerCredits = playerCredits - credits;
 
+                if (target.equals(player)) {
+                    if (newPlayerCredits <= 0) {
+                        target.sendMessage(color(String.format("&cYou have been removed %s credits.", credits)));
+                        cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), 0);
+                        return true;
+                    }
+                    target.sendMessage(color(String.format("&cYou have been removed %s credits.", credits)));
+                    cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), newPlayerCredits);
+                    return true;
+                }
+
+                if (newPlayerCredits <= 0) {
+                    player.sendMessage(color(String.format("&aYou successfully removed %s credits to %s", credits, target.getName())));
+                    target.sendMessage(color(String.format("&cYou have been removed %s credits.", credits)));
+                    cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), 0);
+                    return true;
+                }
                 player.sendMessage(color(String.format("&aYou successfully removed %s credits to %s", credits, target.getName())));
                 target.sendMessage(color(String.format("&cYou have been removed %s credits.", credits)));
                 cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), newPlayerCredits);

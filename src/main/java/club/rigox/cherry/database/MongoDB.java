@@ -21,7 +21,7 @@ public class MongoDB {
         return cherry.getDatabase().getString("mongodb." + str);
     }
 
-    public boolean connect(){
+    public void connect(){
         MongoClientURI uri = new MongoClientURI(String.format("mongodb+srv://%s:%s@%s/admin?retryWrites=true&w=majority",
                 databaseConfig("user"),
                 databaseConfig("password"),
@@ -30,7 +30,6 @@ public class MongoDB {
         client = new MongoClient(uri);
         DB database = client.getDB(databaseConfig("database"));
         playerCollection = database.getCollection("players");
-        return true;
     }
 
     public void storePlayer (UUID uuid, int credits) {
