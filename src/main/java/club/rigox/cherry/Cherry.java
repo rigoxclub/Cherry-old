@@ -4,27 +4,26 @@ import club.rigox.cherry.commands.CherryEconomy;
 import club.rigox.cherry.commands.Credits;
 import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.listeners.PlayerListener;
+import club.rigox.cherry.utils.ConfigUtils;
 import club.rigox.cherry.utils.PlayerUtils;
 import co.aikar.commands.PaperCommandManager;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static club.rigox.cherry.utils.ConsoleUtils.*;
+import static club.rigox.cherry.utils.ConsoleUtils.debug;
+import static club.rigox.cherry.utils.ConsoleUtils.error;
 
 public final class Cherry extends JavaPlugin {
     public static Cherry instance;
 
     private MongoDB mongoDB;
     private FileConfiguration database;
+    private ConfigUtils configUtils;
     private PlayerUtils playerUtils;
     private Economy economy = null;
 
@@ -32,10 +31,8 @@ public final class Cherry extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
-        mongoLogger.setLevel(Level.SEVERE);
-
-        this.database = createConfig("database");
+        configUtils = new ConfigUtils(this);
+        this.database = configUtils.createConfig("database");
 
         this.playerUtils = new PlayerUtils(this);
 
@@ -97,22 +94,5 @@ public final class Cherry extends JavaPlugin {
 
     public Economy getEconomy() {
         return economy;
-    }
-
-    public FileConfiguration createConfig(String configName) {
-        File configFile = new File(getDataFolder(), configName + ".yml");
-        if (!configFile.exists()) {
-            configFile.getParentFile().mkdirs();
-            saveResource(configName + ".yml", false);
-        }
-
-        FileConfiguration cfg = new YamlConfiguration();
-        try {
-            cfg.load(configFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            warn(String.format("A error occurred while copying the config %s.yml to the plugin data folder. Error: %s", configName, e));
-            e.printStackTrace();
-        }
-        return cfg;
     }
 }
