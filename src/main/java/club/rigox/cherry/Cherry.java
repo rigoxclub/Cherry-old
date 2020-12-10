@@ -4,6 +4,7 @@ import club.rigox.cherry.commands.CherryEconomy;
 import club.rigox.cherry.commands.Credits;
 import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.listeners.PlayerListener;
+import club.rigox.cherry.utils.PlayerUtils;
 import co.aikar.commands.PaperCommandManager;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -23,6 +24,7 @@ public final class Cherry extends JavaPlugin {
 
     private MongoDB mongoDB;
     private FileConfiguration database;
+    private PlayerUtils playerUtils;
 
     @Override
     public void onEnable() {
@@ -32,6 +34,8 @@ public final class Cherry extends JavaPlugin {
         mongoLogger.setLevel(Level.SEVERE);
 
         this.database = createConfig("database");
+
+        this.playerUtils = new PlayerUtils(this);
 
         this.mongoDB = new MongoDB(this);
         getMongoDB().connect();
@@ -62,8 +66,8 @@ public final class Cherry extends JavaPlugin {
 
     }
 
-    public void updatePlayerCredits(Player player, int credits) {
-        mongoDB.updatePlayerCredits(player.getUniqueId(), credits);
+    public PlayerUtils getPlayerUtils() {
+        return playerUtils;
     }
 
     public FileConfiguration createConfig(String configName) {
