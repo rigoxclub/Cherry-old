@@ -8,6 +8,7 @@ import co.aikar.commands.PaperCommandManager;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -56,9 +57,13 @@ public final class Cherry extends JavaPlugin {
     public void registerCommands() {
         PaperCommandManager manager = new PaperCommandManager(this);
 
-        new CherryEconomy(this);
+        manager.registerCommand(new CherryEconomy(this));
         manager.registerCommand(new Credits(this));
 
+    }
+
+    public void updatePlayerCredits(Player player, int credits) {
+        mongoDB.updatePlayerCredits(player.getUniqueId(), credits);
     }
 
     public FileConfiguration createConfig(String configName) {
