@@ -7,6 +7,7 @@ import co.aikar.commands.annotation.Default;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static club.rigox.cherry.utils.ConsoleUtils.cmdUsage;
 import static club.rigox.cherry.utils.ConsoleUtils.color;
 
 @CommandAlias("money|balance|credits")
@@ -25,6 +26,10 @@ public class Credits extends BaseCommand {
         }
 
         Player player = (Player) sender;
+        if (args.length > 1) {
+            cmdUsage(player, "/credits (player)");
+            return;
+        }
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
             if (target == null) {
