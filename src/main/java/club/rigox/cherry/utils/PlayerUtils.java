@@ -53,8 +53,7 @@ public class PlayerUtils {
     }
 
     public void setCredits(Player target, int credits, Player sender) {
-        int playerCredits = cherry.getMongoDB().getPlayerCredits(target.getUniqueId());
-        if (credits <= 0) {
+        if (credits < 0) {
             sender.sendMessage(color(String.format("&cYou can't set a negative number! &7(Value provided: %s)", credits)));
             return;
         }
