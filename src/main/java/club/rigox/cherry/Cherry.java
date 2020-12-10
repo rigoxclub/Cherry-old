@@ -6,10 +6,11 @@ import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.listeners.PlayerListener;
 import club.rigox.cherry.utils.PlayerUtils;
 import co.aikar.commands.PaperCommandManager;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static club.rigox.cherry.utils.ConsoleUtils.warn;
+import static club.rigox.cherry.utils.ConsoleUtils.*;
 
 public final class Cherry extends JavaPlugin {
     public static Cherry instance;
@@ -25,6 +26,7 @@ public final class Cherry extends JavaPlugin {
     private MongoDB mongoDB;
     private FileConfiguration database;
     private PlayerUtils playerUtils;
+    private Economy economy = null;
 
     @Override
     public void onEnable() {
@@ -41,6 +43,12 @@ public final class Cherry extends JavaPlugin {
         getMongoDB().connect();
 
         registerCommands();
+
+        if (!setupEconomy()) {
+            error("Vault is required for this plugin to work.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         new PlayerListener(this);
     }
@@ -68,6 +76,27 @@ public final class Cherry extends JavaPlugin {
 
     public PlayerUtils getPlayerUtils() {
         return playerUtils;
+    }
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            debug("Plugin Vault not found, returning false.");
+            return false;
+        }
+
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            debug("RegisteredServiceProvider is null, returning false.");
+            return false;
+        }
+
+        economy = rsp.getProvider();
+        debug("Ok, everything is fine, returning true.");
+        return true;
+    }
+
+    public Economy getEconomy() {
+        return economy;
     }
 
     public FileConfiguration createConfig(String configName) {

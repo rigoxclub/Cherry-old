@@ -17,6 +17,10 @@ public class ConsoleUtils {
         Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&eWARN&f] %s", str)));
     }
 
+    public static void error (String str) {
+        Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&cERROR&f] %s", str)));
+    }
+
     public static void info (String str) {
         Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&aINFO&f] %s", str)));
     }
