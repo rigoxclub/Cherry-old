@@ -32,10 +32,7 @@ public class Credits extends BaseCommand {
         }
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (target == null) {
-                player.sendMessage(color(String.format("&c%s is offline right now!", player.getName())));
-                return;
-            }
+            if (cherry.getPlayerUtils().isOffline(player, target)) return;
 
             if (!sender.hasPermission("cherry.credits.other")) {
                 sender.sendMessage(color("&cYou need the &acherry.credits.other &cto view other player credits!"));
