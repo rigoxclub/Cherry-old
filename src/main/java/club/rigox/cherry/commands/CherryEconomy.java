@@ -81,6 +81,35 @@ public class CherryEconomy extends BaseCommand {
         cmdUsage(player, "/cherry give &7(player) (credits)");
     }
 
+    @Subcommand("set")
+    @CommandPermission("cherry.set")
+    public void setCommand(CommandSender sender, String[] args) {
+        Player player = (Player) sender;
+
+        if (args.length == 1) {
+            Player target = cherry.getServer().getPlayer(args[0]);
+            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+
+            cmdUsage(player, String.format("/cherry set %s &7(credits)", target.getName()));
+            return;
+        }
+
+        if (args.length == 2) {
+            Player target = cherry.getServer().getPlayer(args[0]);
+            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+
+            String credits = args[1];
+            if (!NumberUtils.isNumber(credits)) {
+                player.sendMessage(color("&cPlease provide numbers!"));
+                return;
+            }
+
+            cherry.getPlayerUtils().setCredits(target, Integer.parseInt(credits), player);
+            return;
+        }
+        cmdUsage(player, "/cherry set &7(player) (credits)");
+    }
+
 
     @HelpCommand
     public void helpCommand(CommandSender sender) {
