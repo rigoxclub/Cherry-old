@@ -42,7 +42,7 @@ public class CherryEconomy extends BaseCommand {
 
             String credits = args[1];
             if (!NumberUtils.isNumber(credits)) {
-            player.sendMessage(color("&cPlease provide numbers!"));
+                player.sendMessage(color("&cPlease provide numbers!"));
                 return;
             }
 
@@ -51,6 +51,36 @@ public class CherryEconomy extends BaseCommand {
         }
         cmdUsage(player, "/cherry take &7(player) (credits)");
     }
+
+    @Subcommand("give")
+    @CommandPermission("cherry.give")
+    public void giveCommand(CommandSender sender, String[] args) {
+        Player player = (Player) sender;
+
+        if (args.length == 1) {
+            Player target = cherry.getServer().getPlayer(args[0]);
+            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+
+            cmdUsage(player, String.format("/cherry give %s &7(credits)", target.getName()));
+            return;
+        }
+
+        if (args.length == 2) {
+            Player target = cherry.getServer().getPlayer(args[0]);
+            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+
+            String credits = args[1];
+            if (!NumberUtils.isNumber(credits)) {
+                player.sendMessage(color("&cPlease provide numbers!"));
+                return;
+            }
+
+            cherry.getPlayerUtils().giveCredits(target, Integer.parseInt(credits), player);
+            return;
+        }
+        cmdUsage(player, "/cherry give &7(player) (credits)");
+    }
+
 
     @HelpCommand
     public void helpCommand(CommandSender sender) {

@@ -31,10 +31,23 @@ public class PlayerUtils {
             }
             return;
         }
-        sender.sendMessage(color(String.format("&a%s credits has been taken of %s balance.", playerCredits - credits, target.getName())));
+        sender.sendMessage(color(String.format("&a%s credits has been taken of %s balance.", credits, target.getName())));
         cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), playerCredits - credits);
         if (!target.equals(sender)) {
-            target.sendMessage(color(String.format("&c%s credits has been taken from your account.", playerCredits - credits)));
+            target.sendMessage(color(String.format("&c%s credits has been taken from your account.", credits)));
+        }
+    }
+
+    public void giveCredits(Player target, int credits, Player sender) {
+        int playerCredits = cherry.getMongoDB().getPlayerCredits(target.getUniqueId());
+        if (credits <= 0) {
+            sender.sendMessage(color(String.format("&cYou can't set a negative number! &7(Value provided: %s)", credits)));
+        }
+
+        sender.sendMessage(color(String.format("&a%s credits has been given to %s balance.", credits, target.getName())));
+        cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), playerCredits + credits);
+        if (!target.equals(sender)) {
+            target.sendMessage(color(String.format("&c%s credits has been given to your account.", credits)));
         }
     }
 }
