@@ -64,4 +64,12 @@ public class PlayerUtils {
             target.sendMessage(color(String.format("&cYour balance has been set to %s credits.", credits)));
         }
     }
+
+    public void resetCredits(Player target, Player sender) {
+        sender.sendMessage(color(String.format("&a%s balance has been reset.", target.getName())));
+        cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), 0);
+        if (!target.equals(sender)) {
+            target.sendMessage(color("&cYour balance has been reset."));
+        }
+    }
 }

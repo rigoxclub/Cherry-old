@@ -110,6 +110,20 @@ public class CherryEconomy extends BaseCommand {
         cmdUsage(player, "/cherry set &7(player) (credits)");
     }
 
+    @Subcommand("reset")
+    @CommandPermission("cherry.reset")
+    public void resetCommand(CommandSender sender, String[] args) {
+        Player player = (Player) sender;
+
+        if (args.length == 1) {
+            Player target = cherry.getServer().getPlayer(args[0]);
+            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+
+            cherry.getPlayerUtils().resetCredits(target, player);
+            return;
+        }
+        cmdUsage(player, "/cherry set &7(player)");
+    }
 
     @HelpCommand
     public void helpCommand(CommandSender sender) {
