@@ -29,6 +29,7 @@ public class PlayerUtils {
             if (!target.equals(sender)) {
                 target.sendMessage(color(String.format("&cYour balance has been cleared by %s", sender.getName())));
             }
+            cherry.getVanillaCore().getScoreBoardAPI().setScoreBoard(target, "general", true);
             return;
         }
         sender.sendMessage(color(String.format("&a%s credits has been taken of %s balance.", credits, target.getName())));

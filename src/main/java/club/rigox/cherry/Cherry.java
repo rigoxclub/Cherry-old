@@ -6,12 +6,14 @@ import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.listeners.PlayerListener;
 import club.rigox.cherry.utils.ConfigUtils;
 import club.rigox.cherry.utils.PlayerUtils;
+import club.rigox.vanillacore.VanillaCore;
 import co.aikar.commands.PaperCommandManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Cherry extends JavaPlugin {
     public static Cherry instance;
+    public static VanillaCore vanillaCore;
 
     private MongoDB mongoDB;
     private FileConfiguration database;
@@ -21,15 +23,13 @@ public final class Cherry extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        vanillaCore = new VanillaCore();
 
         configUtils = new ConfigUtils(this);
         this.database = configUtils.createConfig("database");
-
         this.playerUtils = new PlayerUtils(this);
-
         this.mongoDB = new MongoDB(this);
         getMongoDB().connect();
-
         registerCommands();
 
         new PlayerListener(this);
@@ -54,6 +54,10 @@ public final class Cherry extends JavaPlugin {
         manager.registerCommand(new CherryEconomy(this));
         manager.registerCommand(new Credits(this));
 
+    }
+
+    public VanillaCore getVanillaCore() {
+        return vanillaCore;
     }
 
     public PlayerUtils getPlayerUtils() {
