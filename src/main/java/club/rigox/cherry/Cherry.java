@@ -23,7 +23,6 @@ public final class Cherry extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        vanillaCore = new VanillaCore();
 
         configUtils = new ConfigUtils(this);
         this.database = configUtils.createConfig("database");

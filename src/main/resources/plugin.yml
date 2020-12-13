@@ -6,6 +6,8 @@ api-version: 1.16
 authors: [ sebastn_chan ]
 description: Economy system for Vanilla atm
 website: https://rigox.club
+dependency:
+  - VanillaCore
 commands:
   credits:
     description: Credits command.
