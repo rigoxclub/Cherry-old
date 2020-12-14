@@ -39,7 +39,7 @@ public class Placeholders extends PlaceholderExpansion {
         }
 
         if (identifier.equals("credits")) {
-            return NumberUtils.formatValue(cherry.getPlayerCredits().get(player));
+            return cherry.getNumberUtils().formatValue(cherry.getPlayerCredits().get(player));
         }
 
         return null;

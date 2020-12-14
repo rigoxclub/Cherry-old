@@ -42,11 +42,11 @@ public class Credits extends BaseCommand {
                 return;
             }
 
-            String credits = NumberUtils.formatValue(cherry.getPlayerCredits().get(player));
+            String credits = cherry.getNumberUtils().formatValue(cherry.getPlayerCredits().get(player));
             player.sendMessage(color(String.format("&8&l* &f%s have &b%s &fcredits", target.getName(), credits)));
             return;
         }
-        String credits = NumberUtils.formatValue(cherry.getPlayerCredits().get(player));
+        String credits = cherry.getNumberUtils().formatValue(cherry.getPlayerCredits().get(player));
         player.sendMessage(color(String.format("&8&l* &fYou have &b%s &fcredits", credits)));
     }
 }

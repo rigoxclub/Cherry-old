@@ -13,7 +13,7 @@ public class NumberUtils {
         this.cherry = plugin;
     }
 
-    public static String formatValue(double value) {
+    public String formatValue(double value) {
         if (value < 1000) {
             boolean isWholeNumber = value == Math.round(value);
             DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
