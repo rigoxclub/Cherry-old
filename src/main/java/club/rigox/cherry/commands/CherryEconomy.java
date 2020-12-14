@@ -75,7 +75,7 @@ public class CherryEconomy extends BaseCommand {
                 return;
             }
 
-            cherry.getPlayerUtils().giveCredits(target, Integer.parseInt(credits), player);
+            cherry.getPlayerUtils().giveCredits(target, Double.parseDouble(credits), player);
             return;
         }
         cmdUsage(player, "/cherry give &7(player) (credits)");

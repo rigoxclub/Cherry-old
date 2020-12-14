@@ -41,12 +41,11 @@ public class Credits extends BaseCommand {
                 return;
             }
 
-//            int credits = cherry.getMongoDB().getPlayerCredits(target.getUniqueId());
-            int credits = cherry.getPlayerCredits().get(target);
+            double credits = cherry.getPlayerCredits().get(target);
             player.sendMessage(color(String.format("&8&l* &f%s have &b%s &fcredits", target.getName(), credits)));
             return;
         }
-        int credits = cherry.getMongoDB().getPlayerCredits(player.getUniqueId());
+        double credits = cherry.getMongoDB().getPlayerCredits(player.getUniqueId());
         player.sendMessage(color(String.format("&8&l* &fYou have &b%s &fcredits", credits)));
     }
 }

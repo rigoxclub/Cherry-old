@@ -15,7 +15,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static club.rigox.cherry.utils.ConsoleUtils.error;
 import static club.rigox.cherry.utils.ConsoleUtils.info;
@@ -24,7 +23,7 @@ public final class Cherry extends JavaPlugin {
     public static Cherry instance;
     public static VanillaCore vanillaCore;
 
-    private Map<Player, Integer> playerCredits = new LinkedHashMap<>();
+    private Map<Player, Double> playerCredits = new LinkedHashMap<>();
 
     private MongoDB mongoDB;
     private FileConfiguration database;
@@ -87,7 +86,7 @@ public final class Cherry extends JavaPlugin {
         return database;
     }
 
-    public Map<Player, Integer> getPlayerCredits() {
+    public Map<Player, Double> getPlayerCredits() {
         return playerCredits;
     }
 }

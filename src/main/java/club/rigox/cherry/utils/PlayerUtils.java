@@ -1,7 +1,6 @@
 package club.rigox.cherry.utils;
 
 import club.rigox.cherry.Cherry;
-import club.rigox.vanillacore.player.scoreboard.ScoreboardCreator;
 import org.bukkit.entity.Player;
 
 import static club.rigox.cherry.utils.ConsoleUtils.color;
@@ -21,17 +20,17 @@ public class PlayerUtils {
         return false;
     }
 
-    public int playerCredits(Player player) {
+    public double playerCredits(Player player) {
         return cherry.getPlayerCredits().get(player);
     }
 
-    public ScoreboardCreator updateScoreboard(Player player) {
-        return Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(player, "general", true);
+    public void updateScoreboard(Player player) {
+        Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(player, "general", true);
     }
 
     public void takeCredits(Player target, int credits, Player sender) {
         if (playerCredits(target) - credits <= 0) {
-            cherry.getPlayerCredits().put(target, 0);
+            cherry.getPlayerCredits().put(target, 0.0);
             sender.sendMessage(color(String.format("&aBalance of %s has been reset. &7(The value you provided is higher than player's balance)", target.getName())));
 
             if (!target.equals(sender)) {
@@ -52,7 +51,7 @@ public class PlayerUtils {
         updateScoreboard(target);
     }
 
-    public void giveCredits(Player target, int credits, Player sender) {
+    public void giveCredits(Player target, double credits, Player sender) {
         if (credits <= 0) {
             sender.sendMessage(color(String.format("&cYou can't set a negative number! &7(Value provided: %s)", credits)));
             return;
@@ -67,7 +66,7 @@ public class PlayerUtils {
         }
     }
 
-    public void setCredits(Player target, int credits, Player sender) {
+    public void setCredits(Player target, double credits, Player sender) {
         if (credits < 0) {
             sender.sendMessage(color(String.format("&cYou can't set a negative number! &7(Value provided: %s)", credits)));
             return;
@@ -84,7 +83,7 @@ public class PlayerUtils {
 
     public void resetCredits(Player target, Player sender) {
         sender.sendMessage(color(String.format("&a%s balance has been reset.", target.getName())));
-        cherry.getPlayerCredits().put(target, 0);
+        cherry.getPlayerCredits().put(target, 0.0);
         updateScoreboard(target);
 
         if (!target.equals(sender)) {

@@ -32,13 +32,13 @@ public class MongoDB {
         playerCollection = database.getCollection("players");
     }
 
-    public void storePlayer (UUID uuid, int credits) {
+    public void storePlayer (UUID uuid, double credits) {
         DBObject object = new BasicDBObject("UUID", uuid.toString());
         object.put("credits", credits);
         playerCollection.insert(object);
     }
 
-    public int getPlayerCredits (UUID uuid) {
+    public double getPlayerCredits (UUID uuid) {
         DBObject r = new BasicDBObject("UUID", uuid.toString());
         DBObject found = playerCollection.findOne(r);
 
@@ -47,12 +47,12 @@ public class MongoDB {
             storePlayer(uuid, 100);
             return 0;
         }
-        int credits = (int) found.get("credits");
+        double credits = (double) found.get("credits");
         debug(String.format("uuid %s has %s credits", uuid, credits));
         return credits;
     }
 
-    public void updatePlayerCredits(UUID uuid, int credits) {
+    public void updatePlayerCredits(UUID uuid, double credits) {
         DBObject r = new BasicDBObject("UUID", uuid.toString());
         DBObject found = playerCollection.findOne(r);
 
