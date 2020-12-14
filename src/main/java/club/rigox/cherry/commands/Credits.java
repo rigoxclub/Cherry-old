@@ -30,8 +30,10 @@ public class Credits extends BaseCommand {
             cmdUsage(player, "/credits (player)");
             return;
         }
+
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
+
             if (cherry.getPlayerUtils().isOffline(player, target)) return;
 
             if (!sender.hasPermission("cherry.credits.other")) {
@@ -39,7 +41,8 @@ public class Credits extends BaseCommand {
                 return;
             }
 
-            int credits = cherry.getMongoDB().getPlayerCredits(target.getUniqueId());
+//            int credits = cherry.getMongoDB().getPlayerCredits(target.getUniqueId());
+            int credits = cherry.getPlayerCredits().get(target);
             player.sendMessage(color(String.format("&8&l* &f%s have &b%s &fcredits", target.getName(), credits)));
             return;
         }

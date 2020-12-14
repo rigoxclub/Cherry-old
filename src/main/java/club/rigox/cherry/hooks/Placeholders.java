@@ -38,7 +38,7 @@ public class Placeholders extends PlaceholderExpansion {
         }
 
         if (identifier.equals("credits")) {
-            return String.valueOf(cherry.getMongoDB().getPlayerCredits(player.getUniqueId()));
+            return String.valueOf(cherry.getPlayerCredits().get(player));
         }
 
         return null;

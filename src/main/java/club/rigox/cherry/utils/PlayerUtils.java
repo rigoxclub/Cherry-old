@@ -3,6 +3,8 @@ package club.rigox.cherry.utils;
 import club.rigox.cherry.Cherry;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 import static club.rigox.cherry.utils.ConsoleUtils.color;
 
 public class PlayerUtils {
@@ -20,23 +22,33 @@ public class PlayerUtils {
         return false;
     }
 
-    public void takeCredits(Player target, int credits, Player sender) {
-        int playerCredits = cherry.getMongoDB().getPlayerCredits(target.getUniqueId());
+    public int playerCredits(Player player) {
+        return cherry.getPlayerCredits().get(player);
+    }
 
-        if (playerCredits - credits <= 0) {
-            cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), 0);
+    public void takeCredits(Player target, int credits, Player sender) {
+//        int playerCredits = cherry.getPlayerCredits().get(target.getUniqueId());
+
+        if (playerCredits(target) - credits <= 0) {
+//            cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), 0);
+            cherry.getPlayerCredits().put(target, 0);
+
             sender.sendMessage(color(String.format("&aBalance of %s has been reset. &7(The value you provided is higher than player's balance)", target.getName())));
             if (!target.equals(sender)) {
                 target.sendMessage(color(String.format("&cYour balance has been cleared by %s", sender.getName())));
             }
+
             Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(target, "general", true);
             return;
         }
+
         sender.sendMessage(color(String.format("&a%s credits has been taken of %s balance.", credits, target.getName())));
-        cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), playerCredits - credits);
+//        cherry.getMongoDB().updatePlayerCredits(target.getUniqueId(), playerCredits - credits);
+        cherry.getPlayerCredits().put(target, playerCredits(target) - credits);
         if (!target.equals(sender)) {
             target.sendMessage(color(String.format("&c%s credits has been taken from your account.", credits)));
         }
+
         Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(target, "general", true);
     }
 

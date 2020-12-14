@@ -8,10 +8,14 @@ import club.rigox.cherry.listeners.PlayerListener;
 import club.rigox.cherry.utils.ConfigUtils;
 import club.rigox.cherry.utils.PlayerUtils;
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import co.aikar.commands.PaperCommandManager;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import static club.rigox.cherry.utils.ConsoleUtils.error;
 import static club.rigox.cherry.utils.ConsoleUtils.info;
@@ -20,10 +24,11 @@ public final class Cherry extends JavaPlugin {
     public static Cherry instance;
     public static VanillaCore vanillaCore;
 
+    private Map<Player, Integer> playerCredits = new LinkedHashMap<>();
+
     private MongoDB mongoDB;
     private FileConfiguration database;
     private PlayerUtils playerUtils;
-    private ScoreBoardAPI scoreBoardAPI;
 
     @Override
     public void onEnable() {
@@ -35,7 +40,6 @@ public final class Cherry extends JavaPlugin {
         this.database = configUtils.createConfig("database");
         this.playerUtils = new PlayerUtils(this);
         this.mongoDB = new MongoDB(this);
-        this.scoreBoardAPI = new ScoreBoardAPI(vanillaCore);
 
         new PlayerListener(this);
 
@@ -81,5 +85,9 @@ public final class Cherry extends JavaPlugin {
 
     public FileConfiguration getDatabase() {
         return database;
+    }
+
+    public Map<Player, Integer> getPlayerCredits() {
+        return playerCredits;
     }
 }
