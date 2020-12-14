@@ -27,28 +27,6 @@ public class NumberUtils {
         suffixes.put(1_000_000_000_000_000_000d, "E");
     }
 
-    public static String format(Double value) {
-        if (value == Double.MIN_VALUE) {
-            return format(Double.MIN_VALUE + 1);
-        }
-
-        if (value < 0) {
-            return "-" + format(-value);
-        }
-
-        if (value < 1000) {
-            return Double.toString(value);
-        }
-
-        Map.Entry<Double, String> e = suffixes.floorEntry(value);
-        Double divideBy = e.getKey();
-        String suffix = e.getValue();
-
-        double truncated = value / (divideBy / 10);
-        boolean hasDecimal = truncated < 100 && (truncated / 10d) != (truncated / 10);
-        return hasDecimal ? (truncated / 10d) + suffix : (truncated / 10) + suffix;
-    }
-
     public static String formatValue(double value) {
         if (value < 1000) {
             boolean isWholeNumber = value == Math.round(value);
