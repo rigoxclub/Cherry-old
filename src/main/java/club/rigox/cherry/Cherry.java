@@ -6,6 +6,7 @@ import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.hooks.Placeholders;
 import club.rigox.cherry.listeners.PlayerListener;
 import club.rigox.cherry.utils.ConfigUtils;
+import club.rigox.cherry.utils.NumberUtils;
 import club.rigox.cherry.utils.PlayerUtils;
 import club.rigox.vanillacore.VanillaCore;
 import co.aikar.commands.PaperCommandManager;
@@ -28,6 +29,7 @@ public final class Cherry extends JavaPlugin {
     private MongoDB mongoDB;
     private FileConfiguration database;
     private PlayerUtils playerUtils;
+    private NumberUtils numberUtils;
 
     @Override
     public void onEnable() {
@@ -88,5 +90,9 @@ public final class Cherry extends JavaPlugin {
 
     public Map<Player, Double> getPlayerCredits() {
         return playerCredits;
+    }
+
+    public NumberUtils getNumberUtils() {
+        return numberUtils;
     }
 }

@@ -1,6 +1,7 @@
 package club.rigox.cherry.commands;
 
 import club.rigox.cherry.Cherry;
+import club.rigox.cherry.utils.NumberUtils;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
@@ -41,11 +42,11 @@ public class Credits extends BaseCommand {
                 return;
             }
 
-            double credits = cherry.getPlayerCredits().get(target);
+            String credits = NumberUtils.formatValue(cherry.getPlayerCredits().get(player));
             player.sendMessage(color(String.format("&8&l* &f%s have &b%s &fcredits", target.getName(), credits)));
             return;
         }
-        double credits = cherry.getMongoDB().getPlayerCredits(player.getUniqueId());
+        String credits = NumberUtils.formatValue(cherry.getPlayerCredits().get(player));
         player.sendMessage(color(String.format("&8&l* &fYou have &b%s &fcredits", credits)));
     }
 }
