@@ -51,14 +51,17 @@ public class NumberUtils {
 
     public static String formatValue(double value) {
         if (value < 1000) {
-            return Double.toString(value);
+            boolean isWholeNumber = value == Math.round(value);
+            DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
+            formatSymbols.setDecimalSeparator('.');
+            String pattern = isWholeNumber ? "###" : "###.00";
+            DecimalFormat df = new DecimalFormat(pattern, formatSymbols);
+            return df.format(value);
         }
 
         Map.Entry<Double, String> e = suffixes.floorEntry(value);
         String suffix = e.getValue();
 
-//        DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
-//        formatSymbols.setDecimalSeparator('.');
         DecimalFormat df = new DecimalFormat("###,###");
 
         return df.format(value) + suffix;
