@@ -5,11 +5,13 @@ main: club.rigox.cherry.Cherry
 api-version: 1.16
 authors: [ sebastn_chan ]
 description: Economy system for Vanilla atm
-website: https://rigox.club
-dependency:
+depend:
   - VanillaCore
+website: https://rigox.club
 commands:
   credits:
     description: Credits command.
   cherry:
     description: Cherry command.
+  pajin:
+    description: Sos un pajin.

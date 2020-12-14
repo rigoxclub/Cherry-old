@@ -43,7 +43,6 @@ public class Credits extends BaseCommand {
             player.sendMessage(color(String.format("&8&l* &f%s have &b%s &fcredits", target.getName(), credits)));
             return;
         }
-
         int credits = cherry.getMongoDB().getPlayerCredits(player.getUniqueId());
         player.sendMessage(color(String.format("&8&l* &fYou have &b%s &fcredits", credits)));
     }
