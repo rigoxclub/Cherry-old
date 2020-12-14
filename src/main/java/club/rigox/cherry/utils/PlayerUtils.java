@@ -29,8 +29,7 @@ public class PlayerUtils {
             if (!target.equals(sender)) {
                 target.sendMessage(color(String.format("&cYour balance has been cleared by %s", sender.getName())));
             }
-            cherry.getScoreBoardAPI().setScoreBoard(target, "general", true);
-//            Cherry.getVanillaCore().getScoreBoardAPI().setScoreBoard(target, "general", true);
+            Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(target, "general", true);
             return;
         }
         sender.sendMessage(color(String.format("&a%s credits has been taken of %s balance.", credits, target.getName())));
@@ -38,9 +37,7 @@ public class PlayerUtils {
         if (!target.equals(sender)) {
             target.sendMessage(color(String.format("&c%s credits has been taken from your account.", credits)));
         }
-        cherry.getScoreBoardAPI().setScoreBoard(target, "general", true);
-//        Cherry.getVanillaCore().getScoreBoardAPI().setScoreBoard(target, "general", true);
-
+        Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(target, "general", true);
     }
 
     public void giveCredits(Player target, int credits, Player sender) {

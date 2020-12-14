@@ -13,5 +13,3 @@ commands:
     description: Credits command.
   cherry:
     description: Cherry command.
-  pajin:
-    description: Sos un pajin.

@@ -2,7 +2,6 @@ package club.rigox.cherry;
 
 import club.rigox.cherry.commands.CherryEconomy;
 import club.rigox.cherry.commands.Credits;
-import club.rigox.cherry.commands.LittleTest;
 import club.rigox.cherry.database.MongoDB;
 import club.rigox.cherry.hooks.Placeholders;
 import club.rigox.cherry.listeners.PlayerListener;
@@ -15,6 +14,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static club.rigox.cherry.utils.ConsoleUtils.error;
+import static club.rigox.cherry.utils.ConsoleUtils.info;
 
 public final class Cherry extends JavaPlugin {
     public static Cherry instance;
@@ -28,29 +28,30 @@ public final class Cherry extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        vanillaCore = VanillaCore.instance;
 
         ConfigUtils configUtils = new ConfigUtils(this);
+
         this.database = configUtils.createConfig("database");
-        registerCommands();
-        loadHooks();
-        new PlayerListener(this);
         this.playerUtils = new PlayerUtils(this);
         this.mongoDB = new MongoDB(this);
-        getMongoDB().connect();
-
-        new LittleTest(this);
-//        scoreBoardAPI = new ScoreBoardAPI(vanillaCore);
         this.scoreBoardAPI = new ScoreBoardAPI(vanillaCore);
+
+        new PlayerListener(this);
+
+        registerCommands();
+        loadHooks();
+        getMongoDB().connect();
     }
 
     @Override
     public void onDisable() {
         getMongoDB().close();
+        info("Cherry has been disabled!");
     }
 
     public void registerCommands() {
         PaperCommandManager manager = new PaperCommandManager(this);
-
         manager.registerCommand(new CherryEconomy(this));
         manager.registerCommand(new Credits(this));
     }
@@ -61,11 +62,13 @@ public final class Cherry extends JavaPlugin {
             error("Could not find PlaceholderAPI! This plugin is required.");
             getServer().getPluginManager().disablePlugin(this);
         }
+        info("Successfully hooked with PlaceholderAPI!");
 
         if (getServer().getPluginManager().getPlugin("VanillaCore") == null) {
             error("Could not find VanillaCore! This plugin is required.");
             getServer().getPluginManager().disablePlugin(this);
         }
+        info("Successfully hooked with VanillaCore!");
     }
 
     public PlayerUtils getPlayerUtils() {
@@ -78,13 +81,5 @@ public final class Cherry extends JavaPlugin {
 
     public FileConfiguration getDatabase() {
         return database;
-    }
-
-    public ScoreBoardAPI getScoreBoardAPI() {
-        return scoreBoardAPI;
-    }
-
-    public static VanillaCore getVanillaCore() {
-        return vanillaCore;
     }
 }
