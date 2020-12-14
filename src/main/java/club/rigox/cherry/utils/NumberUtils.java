@@ -23,7 +23,7 @@ public class NumberUtils {
             return df.format(value);
         }
 
-        DecimalFormat df = new DecimalFormat("###,###");
+        DecimalFormat df = new DecimalFormat("###.###");
 
         if (value >= 1_000_000_000_000_000_000d) {
             return "Quintillons not allowed.";
