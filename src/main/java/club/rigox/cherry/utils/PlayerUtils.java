@@ -4,6 +4,7 @@ import club.rigox.cherry.Cherry;
 import org.bukkit.entity.Player;
 
 import static club.rigox.cherry.utils.ConsoleUtils.color;
+import static club.rigox.cherry.utils.ConsoleUtils.debug;
 
 public class PlayerUtils {
     private final Cherry cherry;
@@ -88,6 +89,14 @@ public class PlayerUtils {
 
         if (!target.equals(sender)) {
             target.sendMessage(color("&cYour balance has been reset."));
+        }
+    }
+
+    public void saveCreditsOnStop() {
+        for (Player player : cherry.getServer().getOnlinePlayers()) {
+            cherry.getMongoDB().updatePlayerCredits(player.getUniqueId(), cherry.getPlayerCredits().get(player));
+            debug(String.format("%s has %s credits, they have been saved on server stop.", player.getName(), cherry.getPlayerCredits().get(player)));
+            cherry.getPlayerCredits().remove(player);
         }
     }
 }

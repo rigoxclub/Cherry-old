@@ -52,6 +52,7 @@ public final class Cherry extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        playerUtils.saveCreditsOnStop();
         getMongoDB().close();
         info("Cherry has been disabled!");
     }
