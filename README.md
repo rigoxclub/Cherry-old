@@ -5,17 +5,17 @@
 Simple Economy plugin made for Rigox Club network.
 
 ## Commands
-  -  /credits
-  -  /cherry give
-  -  /cherry take
-  -  /cherry reset
-  -  /cherry set
+-  /credits
+-  /cherry give
+-  /cherry take
+-  /cherry reset
+-  /cherry set
 
 ### Permissions
-  -  cherry.give
-  -  cherry.take
-  -  cherry.reset
-  -  cherry.set
+-  cherry.give
+-  cherry.take
+-  cherry.reset
+-  cherry.set
 
 ## Warning
 This project has been hooked with VanillaCore, a 
