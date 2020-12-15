@@ -1,7 +1,6 @@
 package club.rigox.cherry.hooks;
 
 import club.rigox.cherry.Cherry;
-import club.rigox.cherry.utils.NumberUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 

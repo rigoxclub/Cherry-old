@@ -3,7 +3,6 @@ package club.rigox.cherry.commands;
 import club.rigox.cherry.Cherry;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -41,12 +40,8 @@ public class CherryEconomy extends BaseCommand {
             if (cherry.getPlayerUtils().isOffline(player, target)) return;
 
             String credits = args[1];
-            if (!NumberUtils.isNumber(credits)) {
-                player.sendMessage(color("&cPlease provide numbers!"));
-                return;
-            }
-
-            cherry.getPlayerUtils().takeCredits(target, Integer.parseInt(credits), player);
+            if (cherry.getNumberUtils().checkNumber(credits, player, target)) return;
+            cherry.getPlayerUtils().takeCredits(target, Double.parseDouble(credits), player);
             return;
         }
         cmdUsage(player, "/cherry take &7(player) (credits)");
@@ -59,8 +54,7 @@ public class CherryEconomy extends BaseCommand {
 
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (cherry.getPlayerUtils().isOffline(player, target)) return;
-
+            if (!cherry.getPlayerUtils().isOffline(player, target)) return;
             cmdUsage(player, String.format("/cherry give %s &7(credits)", target.getName()));
             return;
         }
@@ -70,11 +64,7 @@ public class CherryEconomy extends BaseCommand {
             if (cherry.getPlayerUtils().isOffline(player, target)) return;
 
             String credits = args[1];
-            if (!NumberUtils.isNumber(credits)) {
-                player.sendMessage(color("&cPlease provide numbers!"));
-                return;
-            }
-
+            if (!cherry.getNumberUtils().checkNumber(credits, player, target)) return;
             cherry.getPlayerUtils().giveCredits(target, Double.parseDouble(credits), player);
             return;
         }
@@ -99,12 +89,8 @@ public class CherryEconomy extends BaseCommand {
             if (cherry.getPlayerUtils().isOffline(player, target)) return;
 
             String credits = args[1];
-            if (!NumberUtils.isNumber(credits)) {
-                player.sendMessage(color("&cPlease provide numbers!"));
-                return;
-            }
-
-            cherry.getPlayerUtils().setCredits(target, Integer.parseInt(credits), player);
+            if (cherry.getNumberUtils().checkNumber(credits, player, target)) return;
+            cherry.getPlayerUtils().setCredits(target, Double.parseDouble(credits), player);
             return;
         }
         cmdUsage(player, "/cherry set &7(player) (credits)");

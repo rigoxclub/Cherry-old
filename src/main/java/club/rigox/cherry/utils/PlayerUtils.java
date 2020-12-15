@@ -28,7 +28,7 @@ public class PlayerUtils {
         Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(player, "general", true);
     }
 
-    public void takeCredits(Player target, int credits, Player sender) {
+    public void takeCredits(Player target, double credits, Player sender) {
         if (playerCredits(target) - credits <= 0) {
             cherry.getPlayerCredits().put(target, 0.0);
             sender.sendMessage(color(String.format("&aBalance of %s has been reset. &7(The value you provided is higher than player's balance)", target.getName())));
