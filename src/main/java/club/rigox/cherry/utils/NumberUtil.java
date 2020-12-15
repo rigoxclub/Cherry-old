@@ -9,7 +9,6 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 import static club.rigox.cherry.utils.ConsoleUtils.color;
-import static club.rigox.cherry.utils.ConsoleUtils.debug;
 
 public class NumberUtil {
     private final Cherry cherry;
@@ -18,65 +17,65 @@ public class NumberUtil {
         this.cherry = plugin;
     }
 
-    public String formatValue(double value) {
-        if (value < 1000) {
-            boolean isWholeNumber = value == Math.round(value);
+    public String formatcredits(double credits) {
+        if (credits < 1000) {
+            boolean isWholeNumber = credits == Math.round(credits);
             DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
             formatSymbols.setDecimalSeparator('.');
             String pattern = isWholeNumber ? "###" : "###.00";
             DecimalFormat df = new DecimalFormat(pattern, formatSymbols);
-            return df.format(value);
+            return df.format(credits);
         }
 
         DecimalFormat df = new DecimalFormat("###.###");
 
-        if (value >= 1_000_000_000_000_000_000d) {
+        if (credits >= 1_000_000_000_000_000_000d) {
             return "Quintillons not allowed.";
         }
 
-        if (value >= 1_000_000_000_000_000d) {
-            value = value / 1_000_000_000_000_000d;
-            return df.format(value) + "Q";
+        if (credits >= 1_000_000_000_000_000d) {
+            credits = credits / 1_000_000_000_000_000d;
+            return df.format(credits) + "Q";
         }
 
-        if (value >= 1_000_000_000_000d) {
-            value = value / 1_000_000_000_000d;
-            return df.format(value) + "T";
+        if (credits >= 1_000_000_000_000d) {
+            credits = credits / 1_000_000_000_000d;
+            return df.format(credits) + "T";
         }
 
-        if (value >= 1_000_000_000d) {
-            value = value / 1_000_000_000d;
-            return df.format(value) + "B";
+        if (credits >= 1_000_000_000d) {
+            credits = credits / 1_000_000_000d;
+            return df.format(credits) + "B";
         }
 
-        if (value >= 1_000_000d) {
-            value = value / 1_000_000d;
-            return df.format(value) + "M";
+        if (credits >= 1_000_000d) {
+            credits = credits / 1_000_000d;
+            return df.format(credits) + "M";
         }
 
-        if (value >= 1_000d) {
-            value = value / 1_000d;
-            return df.format(value) + "k";
+        if (credits >= 1_000d) {
+            credits = credits / 1_000d;
+            return df.format(credits) + "k";
         }
 
         return "Something weird has just happened... (NumberUtils)";
     }
 
-    public boolean checkNumber(String value, Player player, Player target) {
+    public boolean checkNumber(String credits, Player player, Player target) {
         double playerBalance = cherry.getPlayerCredits().get(target);
 
-        if (!(NumberUtils.isNumber(value))) {
+        if (!(NumberUtils.isNumber(credits))) {
             sendErrorMsg(player);
             return false;
         }
 
-        if (NumberUtils.isNumber(value)) {
-            if (Double.parseDouble(value) >= 1_000_000_000d) {
+        if (NumberUtils.isNumber(credits)) {
+            if (Double.parseDouble(credits) >= 1_000_000_000d) {
                 sendErrorMsg(player);
                 return false;
             }
 
-            if (Integer.parseInt(value) + playerBalance >= 1_000_000_000_000_000_000d) {
+            if (Integer.parseInt(credits) + playerBalance >= 1_000_000_000_000_000_000d) {
                 sendErrorMsg(player);
                 return false;
             }
