@@ -40,7 +40,7 @@ public class CherryEconomy extends BaseCommand {
             if (cherry.getPlayerUtils().isOffline(player, target)) return;
 
             String credits = args[1];
-            if (cherry.getNumberUtils().checkNumber(credits, player, target)) return;
+            if (!cherry.getNumberUtils().checkNumber(credits, player, target)) return;
             cherry.getPlayerUtils().takeCredits(target, Double.parseDouble(credits), player);
             return;
         }
@@ -89,7 +89,7 @@ public class CherryEconomy extends BaseCommand {
             if (cherry.getPlayerUtils().isOffline(player, target)) return;
 
             String credits = args[1];
-            if (cherry.getNumberUtils().checkNumber(credits, player, target)) return;
+            if (!cherry.getNumberUtils().checkNumber(credits, player, target)) return;
             cherry.getPlayerUtils().setCredits(target, Double.parseDouble(credits), player);
             return;
         }
@@ -111,6 +111,19 @@ public class CherryEconomy extends BaseCommand {
         cmdUsage(player, "/cherry set &7(player)");
     }
 
+    @Subcommand("admin")
+    public void adminCommand(CommandSender sender) {
+        sender.sendMessage(color("&7&m------------------------------------------------"));
+        sender.sendMessage(color("&b&lCherry Economy"));
+        sender.sendMessage(color("&7&oCommand Help"));
+        sender.sendMessage(color("&7&m------------------------------------------------"));
+        sender.sendMessage(color("&8&l* &b/cherry give (player) (credits) &f- Give player credits"));
+        sender.sendMessage(color("&8&l* &b/cherry take (player) (credits) &f- Take player credits"));
+        sender.sendMessage(color("&8&l* &b/cherry set (player) (credits) &f- Set player credits"));
+        sender.sendMessage(color("&8&l* &c/cherry reset (player) &f- Reset player credits"));
+        sender.sendMessage(color("&7&m------------------------------------------------"));
+    }
+
     @HelpCommand
     public void helpCommand(CommandSender sender) {
         sender.sendMessage(color("&7&m------------------------------------------------"));
@@ -118,6 +131,7 @@ public class CherryEconomy extends BaseCommand {
         sender.sendMessage(color("&7&oCommand Help"));
         sender.sendMessage(color("&7&m------------------------------------------------"));
         sender.sendMessage(color("&8&l* &b/credits &f- View your credits"));
+        sender.sendMessage(color("&8&l* &c/cherry admin &f- View admin command help"));
         sender.sendMessage(color("&7&m------------------------------------------------"));
     }
 }
