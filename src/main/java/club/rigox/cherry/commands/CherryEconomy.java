@@ -25,90 +25,90 @@ public class CherryEconomy extends BaseCommand {
     @Subcommand("take")
     @CommandPermission("cherry.take")
     public void takeCommand(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
+//        Player player = (Player) sender;
 
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+            if (cherry.getPlayerUtils().isOffline(sender, target)) return;
 
-            cmdUsage(player, String.format("/cherry take %s &7(credits)", target.getName()));
+            cmdUsage(sender, String.format("/cherry take %s &7(credits)", target.getName()));
             return;
         }
 
         if (args.length == 2) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+            if (cherry.getPlayerUtils().isOffline(sender, target)) return;
 
             String credits = args[1];
-            if (!cherry.getNumberUtils().checkNumber(credits, player, target)) return;
-            cherry.getPlayerUtils().takeCredits(target, Double.parseDouble(credits), player);
+            if (!cherry.getNumberUtils().checkNumber(credits, sender, target)) return;
+            cherry.getPlayerUtils().takeCredits(target, Double.parseDouble(credits), sender);
             return;
         }
-        cmdUsage(player, "/cherry take &7(player) (credits)");
+        cmdUsage(sender, "/cherry take &7(player) (credits)");
     }
 
     @Subcommand("give")
     @CommandPermission("cherry.give")
     public void giveCommand(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
+//        Player player = (Player) sender;
 
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (!cherry.getPlayerUtils().isOffline(player, target)) return;
-            cmdUsage(player, String.format("/cherry give %s &7(credits)", target.getName()));
+            if (cherry.getPlayerUtils().isOffline(sender, target)) return;
+            cmdUsage(sender, String.format("/cherry give %s &7(credits)", target.getName()));
             return;
         }
 
         if (args.length == 2) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+            if (cherry.getPlayerUtils().isOffline(sender, target)) return;
 
             String credits = args[1];
-            if (!cherry.getNumberUtils().checkNumber(credits, player, target)) return;
-            cherry.getPlayerUtils().giveCredits(target, Double.parseDouble(credits), player);
+            if (!cherry.getNumberUtils().checkNumber(credits, sender, target)) return;
+            cherry.getPlayerUtils().giveCredits(target, Double.parseDouble(credits), sender);
             return;
         }
-        cmdUsage(player, "/cherry give &7(player) (credits)");
+        cmdUsage(sender, "/cherry give &7(player) (credits)");
     }
 
     @Subcommand("set")
     @CommandPermission("cherry.set")
     public void setCommand(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
+//        Player player = (Player) sender;
 
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+            if (cherry.getPlayerUtils().isOffline(sender, target)) return;
 
-            cmdUsage(player, String.format("/cherry set %s &7(credits)", target.getName()));
+            cmdUsage(sender, String.format("/cherry set %s &7(credits)", target.getName()));
             return;
         }
 
         if (args.length == 2) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+            if (cherry.getPlayerUtils().isOffline(sender, target)) return;
 
             String credits = args[1];
-            if (!cherry.getNumberUtils().checkNumber(credits, player, target)) return;
-            cherry.getPlayerUtils().setCredits(target, Double.parseDouble(credits), player);
+            if (!cherry.getNumberUtils().checkNumber(credits, sender, target)) return;
+            cherry.getPlayerUtils().setCredits(target, Double.parseDouble(credits), sender);
             return;
         }
-        cmdUsage(player, "/cherry set &7(player) (credits)");
+        cmdUsage(sender, "/cherry set &7(player) (credits)");
     }
 
     @Subcommand("reset")
     @CommandPermission("cherry.reset")
     public void resetCommand(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
+//        Player player = (Player) sender;
 
         if (args.length == 1) {
             Player target = cherry.getServer().getPlayer(args[0]);
-            if (cherry.getPlayerUtils().isOffline(player, target)) return;
+            if (cherry.getPlayerUtils().isOffline(sender, target)) return;
 
-            cherry.getPlayerUtils().resetCredits(target, player);
+            cherry.getPlayerUtils().resetCredits(target, sender);
             return;
         }
-        cmdUsage(player, "/cherry set &7(player)");
+        cmdUsage(sender, "/cherry set &7(player)");
     }
 
     @Subcommand("admin")

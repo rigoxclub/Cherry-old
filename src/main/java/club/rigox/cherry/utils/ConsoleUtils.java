@@ -2,6 +2,7 @@ package club.rigox.cherry.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ConsoleUtils {
@@ -25,7 +26,7 @@ public class ConsoleUtils {
         Bukkit.getConsoleSender().sendMessage(color(String.format("&f[&aINFO&f] %s", str)));
     }
 
-    public static void cmdUsage (Player player, String str) {
-        player.sendMessage(color(String.format("&8&l* &fCommand usage: &b%s", str)));
+    public static void cmdUsage (CommandSender sender, String str) {
+        sender.sendMessage(color(String.format("&8&l* &fCommand usage: &b%s", str)));
     }
 }

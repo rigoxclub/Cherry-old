@@ -1,6 +1,7 @@
 package club.rigox.cherry.utils;
 
 import club.rigox.cherry.Cherry;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static club.rigox.cherry.utils.ConsoleUtils.color;
@@ -13,7 +14,7 @@ public class PlayerUtils {
         this.cherry = plugin;
     }
 
-    public boolean isOffline (Player sender, Player target) {
+    public boolean isOffline (CommandSender sender, Player target) {
         if (target == null) {
             sender.sendMessage(color("&cThe player you provided is offline."));
             return true;
@@ -29,7 +30,7 @@ public class PlayerUtils {
         Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(player, "general", true);
     }
 
-    public void takeCredits(Player target, double credits, Player sender) {
+    public void takeCredits(Player target, double credits, CommandSender sender) {
         if (playerCredits(target) - credits <= 0) {
             cherry.getPlayerCredits().put(target, 0.0);
             sender.sendMessage(color(String.format("&aBalance of %s has been reset. &7(The value you provided is higher than player's balance)", target.getName())));
@@ -52,7 +53,7 @@ public class PlayerUtils {
         updateScoreboard(target);
     }
 
-    public void giveCredits(Player target, double credits, Player sender) {
+    public void giveCredits(Player target, double credits, CommandSender sender) {
         if (credits <= 0) {
             sender.sendMessage(color(String.format("&cYou can't set a negative number! &7(Value provided: %s)", credits)));
             return;
@@ -67,7 +68,7 @@ public class PlayerUtils {
         }
     }
 
-    public void setCredits(Player target, double credits, Player sender) {
+    public void setCredits(Player target, double credits, CommandSender sender) {
         if (credits < 0) {
             sender.sendMessage(color(String.format("&cYou can't set a negative number! &7(Value provided: %s)", credits)));
             return;
@@ -82,7 +83,7 @@ public class PlayerUtils {
         }
     }
 
-    public void resetCredits(Player target, Player sender) {
+    public void resetCredits(Player target, CommandSender sender) {
         sender.sendMessage(color(String.format("&a%s balance has been reset.", target.getName())));
         cherry.getPlayerCredits().put(target, 0.0);
         updateScoreboard(target);
