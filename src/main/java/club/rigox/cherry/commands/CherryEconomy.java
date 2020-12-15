@@ -2,7 +2,11 @@ package club.rigox.cherry.commands;
 
 import club.rigox.cherry.Cherry;
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.*;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.HelpCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

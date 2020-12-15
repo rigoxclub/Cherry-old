@@ -3,7 +3,6 @@ package club.rigox.cherry.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class ConsoleUtils {
     public static String color (String str) {
