@@ -17,7 +17,7 @@ public class NumberUtil {
         this.cherry = plugin;
     }
 
-    public String formatcredits(double credits) {
+    public String formatValue(double credits) {
         if (credits < 1000) {
             boolean isWholeNumber = credits == Math.round(credits);
             DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
