@@ -3,8 +3,10 @@ package club.rigox.cherry.listeners;
 import club.rigox.cherry.Cherry;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import static club.rigox.cherry.utils.ConsoleUtils.debug;
@@ -17,8 +19,8 @@ public class PlayerListener implements Listener {
         cherry.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    @EventHandler
-    public void onPlayerJoin (PlayerJoinEvent event) {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerJoin (PlayerLoginEvent event) {
         Player player = event.getPlayer();
 
         // TODO Move this on the VanillaCore so it loads before the Scoreboard.
