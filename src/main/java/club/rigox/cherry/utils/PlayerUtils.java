@@ -27,7 +27,7 @@ public class PlayerUtils {
     }
 
     public void updateScoreboard(Player player) {
-        Cherry.vanillaCore.getScoreBoardAPI().setScoreBoard(player, "general", true);
+        Cherry.coffee.getScoreBoardAPI().setScoreBoard(player, "general", true);
     }
 
     public void takeCredits(Player target, double credits, CommandSender sender) {

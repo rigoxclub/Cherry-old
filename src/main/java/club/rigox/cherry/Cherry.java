@@ -8,7 +8,7 @@ import club.rigox.cherry.listeners.PlayerListener;
 import club.rigox.cherry.utils.ConfigUtils;
 import club.rigox.cherry.utils.NumberUtil;
 import club.rigox.cherry.utils.PlayerUtils;
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.coffee.Coffee;
 import co.aikar.commands.PaperCommandManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ import static club.rigox.cherry.utils.ConsoleUtils.info;
 
 public final class Cherry extends JavaPlugin {
     public static Cherry instance;
-    public static VanillaCore vanillaCore;
+    public static Coffee coffee;
 
     private Map<Player, Double> playerCredits = new LinkedHashMap<>();
 
@@ -34,7 +34,7 @@ public final class Cherry extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        vanillaCore = VanillaCore.instance;
+        coffee = Coffee.instance;
 
         ConfigUtils configUtils = new ConfigUtils(this);
 
@@ -68,14 +68,16 @@ public final class Cherry extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") == null) {
             error("Could not find PlaceholderAPI! This plugin is required.");
             getServer().getPluginManager().disablePlugin(this);
+            return;
         }
         info("Successfully hooked with PlaceholderAPI!");
 
-        if (getServer().getPluginManager().getPlugin("VanillaCore") == null) {
+        if (getServer().getPluginManager().getPlugin("Coffee") == null) {
             error("Could not find VanillaCore! This plugin is required.");
             getServer().getPluginManager().disablePlugin(this);
+            return;
         }
-        info("Successfully hooked with VanillaCore!");
+        info("Successfully hooked with Coffee!");
     }
 
     public PlayerUtils getPlayerUtils() {
